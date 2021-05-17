@@ -23,7 +23,7 @@ public final class Logic {
     private boolean free(Cell[] steps) throws OccupiedCellException {
         for (int i = 0; i < index; i++) {
             for (Cell step : steps) {
-                if (figures[i].position() == step) {
+                if (step.equals(figures[i].position())) {
                     throw new OccupiedCellException("Could not make this move");
                 }
             }

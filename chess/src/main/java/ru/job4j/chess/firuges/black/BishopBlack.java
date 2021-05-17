@@ -18,9 +18,7 @@ public class BishopBlack implements Figure {
 
     @Override
     public Cell[] way(Cell dest) {
-        Cell source = this.position;
-        int size = Math.abs(dest.getX() - source.getX());
-        Cell[] steps = new Cell[size];
+        Cell source = position;
 
         if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException(
@@ -28,14 +26,17 @@ public class BishopBlack implements Figure {
             );
         }
 
+        int size = Math.abs(dest.getX() - source.getX());
+        Cell[] steps = new Cell[size];
+
         int x = source.getX();
         int y = source.getY();
-        int xIncrease = dest.getX() > source.getX() ? 1 : - 1;
-        int yIncrease = dest.getY() > source.getY() ? 1 : - 1;
+        int deltaX = dest.getX() > source.getX() ? 1 : - 1;
+        int deltaY = dest.getY() > source.getY() ? 1 : - 1;
 
         for (int index = 0; index < size; index++) {
-            x = x + xIncrease;
-            y = y + yIncrease;
+            x += deltaX;
+            y += deltaY;
             steps[index] = Cell.findBy(x, y);
         }
         return steps;

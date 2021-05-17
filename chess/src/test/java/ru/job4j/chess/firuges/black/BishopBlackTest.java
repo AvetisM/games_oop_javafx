@@ -1,12 +1,11 @@
 package ru.job4j.chess.firuges.black;
 
-import com.sun.source.tree.AssertTree;
-import org.junit.Assert;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class BishopBlackTest {
 
@@ -15,14 +14,14 @@ public class BishopBlackTest {
         Cell expect = Cell.A3;
         BishopBlack bishopBlack = new BishopBlack(expect);
         Cell result = bishopBlack.position();
-        assertTrue(expect == result);
+        assertEquals(expect, result);
     }
 
     @Test
     public void copyTest() {
         BishopBlack bishopBlack = new BishopBlack(Cell.A3);
-        Figure copyBishop = bishopBlack.copy(Cell.A3);
-        assertTrue(bishopBlack.position() == copyBishop.position());
+        Figure copyBishop = bishopBlack.copy(Cell.A7);
+        assertEquals(Cell.A7, copyBishop.position());
     }
 
     @Test
@@ -33,4 +32,17 @@ public class BishopBlackTest {
         assertArrayEquals(expect, result);
     }
 
+    @Test
+    public void isDiagonalTest() {
+        Cell dest = Cell.H6;
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        assertTrue(bishopBlack.isDiagonal(bishopBlack.position(), dest));
+    }
+
+    @Test
+    public void isNotDiagonalTest() {
+        Cell dest = Cell.H2;
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        assertFalse(bishopBlack.isDiagonal(bishopBlack.position(), dest));
+    }
 }
